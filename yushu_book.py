@@ -19,9 +19,9 @@ class YuShu:
     @classmethod
     def search_by_isbn(cls, isbn):
         r = HTTP.get(cls.url_search_by_isbn.format(isbn))
-        return jsonify(r)
+        return r
 
     @classmethod
     def search_by_keyword(cls, keyword, count=15, start=0):
         r = HTTP.get(cls.url_search_by_keyword.format(keyword, count, start))
-        return jsonify(r)
+        return r
