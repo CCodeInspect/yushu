@@ -10,11 +10,12 @@ import requests, json
 from flask import jsonify
 
 from httper import HTTP
+from flask import current_app
 
 
 class YuShu:
     url_search_by_isbn = 'http://t.talelin.com/v2/book/isbn/{}'
-    url_search_by_keyword = 'http://yushu.talelin.com/book/search?q={}&count={}&start={}'
+    url_search_by_keyword = 'http://t.talelin.com/v2/book/search?q={}&count={}&start={}'
 
     @classmethod
     def search_by_isbn(cls, isbn):
@@ -22,6 +23,11 @@ class YuShu:
         return r
 
     @classmethod
-    def search_by_keyword(cls, keyword, count=15, start=0):
-        r = HTTP.get(cls.url_search_by_keyword.format(keyword, count, start))
+    def search_by_keyword(cls, keyword, page=1):
+        r = HTTP.get(
+            cls.url_search_by_keyword.format(keyword, current_app.config['PER_PAGE'], cls.calculate_start(page)))
         return r
+
+    @staticmethod
+    def calculate_start(page):
+        return (page - 1) * current_app.config['PER_PAGE']
