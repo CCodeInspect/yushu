@@ -7,9 +7,7 @@
 # @Software: PyCharm
 from helper import is_isbn_or_key
 from yushu_book import YuShu
-from flask import Blueprint
-
-web = Blueprint('web', __name__)  # 定义蓝图
+from app.web import web
 
 
 @web.route(rule='/book/search/<q>/<page>')  # 路由注册到蓝图
