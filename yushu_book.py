@@ -13,7 +13,7 @@ from httper import HTTP
 
 
 class YuShu:
-    url_search_by_isbn = 'http://yushu.talelin.com/v2/book/isbin/{}'
+    url_search_by_isbn = 'http://t.talelin.com/v2/book/isbn/{}'
     url_search_by_keyword = 'http://yushu.talelin.com/book/search?q={}&count={}&start={}'
 
     @classmethod
@@ -23,5 +23,5 @@ class YuShu:
 
     @classmethod
     def search_by_keyword(cls, keyword, count=15, start=0):
-        r = HTTP.get(cls.url_search_by_keyword.format(keyword))
+        r = HTTP.get(cls.url_search_by_keyword.format(keyword, count, start))
         return jsonify(r)
