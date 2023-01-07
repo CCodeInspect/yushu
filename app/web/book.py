@@ -31,4 +31,4 @@ def search():
             res = YuShu.search_by_keyword(q)
         return jsonify(res)
     else:
-        return jsonify({'msg': '参数校验失败'})
+        return jsonify(form.errors)
