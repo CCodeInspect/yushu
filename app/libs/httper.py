@@ -6,7 +6,6 @@
 # @File    : httper.py
 # @Software: PyCharm
 import requests
-from return_normal import return_json, return_text
 
 
 class HTTP(object):

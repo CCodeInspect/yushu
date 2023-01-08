@@ -6,10 +6,7 @@
 # @File    : yushu_book.py
 # @Software: PyCharm
 
-import requests, json
-from flask import jsonify
-
-from httper import HTTP
+from app.libs.httper import HTTP
 from flask import current_app
 
 

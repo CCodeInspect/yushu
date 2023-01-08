@@ -5,8 +5,8 @@
 # @Site    : https://github.com/llaichiyu/
 # @File    : book.py
 # @Software: PyCharm
-from helper import is_isbn_or_key
-from yushu_book import YuShu
+from app.libs.helper import is_isbn_or_key
+from app.spider.yushu_book import YuShu
 from app.web import web
 from flask import request, jsonify
 from app.forms.book import SearchForms
