@@ -5,3 +5,7 @@
 # @Site    : https://github.com/llaichiyu/
 # @File    : __init__.py.py
 # @Software: PyCharm
+
+from flask import Flask
+
+app = Flask(__name__)

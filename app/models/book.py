@@ -9,7 +9,9 @@
 
 from sqlalchemy import Column, Integer, String
 from flask_sqlalchemy import SQLAlchemy
+# from app.models import app
 
+# db = SQLAlchemy(app=app, engine_options=app.config['SQLALCHEMY_DATABASE_URI'])
 db = SQLAlchemy()
 
 
