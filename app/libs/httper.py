@@ -10,8 +10,8 @@ import requests
 
 class HTTP(object):
     @staticmethod
-    def get(url, return_json1=True):
+    def get(url, return_json=True):
         r = requests.get(url)
         if r.status_code != 200:
-            return {'errrrr': '123'} if return_json1 else ''
-        return r.json() if return_json1 else r.text
+            return {'errrrr': '123'} if return_json else ''
+        return r.json() if return_json else r.text
