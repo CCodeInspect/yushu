@@ -10,21 +10,34 @@ from app.libs.httper import HTTP
 from flask import current_app
 
 
-class YuShu:
+class YuShuBook:
     url_search_by_isbn = 'http://t.talelin.com/v2/book/isbn/{}'
     url_search_by_keyword = 'http://t.talelin.com/v2/book/search?q={}&count={}&start={}'
 
-    @classmethod
-    def search_by_isbn(cls, isbn):
-        r = HTTP.get(cls.url_search_by_isbn.format(isbn))
-        return r
+    def __init__(self):
+        self.total = 0
+        self.books = []
 
-    @classmethod
-    def search_by_keyword(cls, keyword, page=1):
-        r = HTTP.get(
-            cls.url_search_by_keyword.format(keyword, current_app.config['PER_PAGE'], cls.calculate_start(page)))
-        return r
+    def __fill_single(self, data):
+        if data:
+            self.total = 1
+            self.books.append(data)
 
-    @staticmethod
-    def calculate_start(page):
+    def __fill_collections(self, data):
+        if data:
+            self.books = data['books']
+            self.total = data['total']
+
+    def search_by_isbn(self, isbn):
+        url = self.url_search_by_isbn.format(isbn)
+        r = HTTP.get(url)
+        self.__fill_single(r)
+
+    def search_by_keyword(self, keyword, page=1):
+        url = self.url_search_by_keyword.format(keyword, current_app.config['PER_PAGE'],
+                                                self.calculate_start(page))
+        r = HTTP.get(url)
+        self.__fill_collections(r)
+
+    def calculate_start(self, page):
         return (page - 1) * current_app.config['PER_PAGE']
