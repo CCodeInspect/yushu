@@ -8,7 +8,7 @@
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
 from app.web import web
-from flask import request, jsonify
+from flask import request, jsonify, render_template
 from app.forms.book import SearchForms
 from app.view_models.book import BookCollections, BookViewModel
 import json
@@ -40,3 +40,23 @@ def search():
         return json.dumps(books, default=lambda x: x.__dict__)
     else:
         return json.dumps(form.errors)
+
+
+@web.route('/test')
+def test():
+    r = {
+        'name': 'pauline',
+        'age': 18
+    }
+
+    r1 = {
+        'name': 'solovotv.liu',
+        'identified': 'husband'
+    }
+    return render_template(template_name_or_list='test.html', context1=r, context2=r1)
+
+
+@web.route('/test1')
+def test2():
+    r = {'sex': 'male'}
+    return render_template(template_name_or_list='test2.html', data=r)
