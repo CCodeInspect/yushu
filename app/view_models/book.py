@@ -24,6 +24,20 @@ class BookViewModel:
         self.pubdate = book['pubdate']
         self.binding = book['binding']
 
+    def intro_1(self):
+        """intro_1() == intro(),intro()使用了filter()"""
+        if self.title:
+            pass
+        if self.publisher:
+            pass
+        if self.author:
+            pass
+
+    @property
+    def intro(self):
+        intros = filter(lambda x: True if x else False, [str(self.author), self.publisher, self.price])
+        return '/'.join(intros)
+
 
 class BookCollections:
     def __init__(self):

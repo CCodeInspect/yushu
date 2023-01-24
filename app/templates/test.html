@@ -1,30 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% if context2.name=='solovotv.liu' %}
-    {{ context2.name }}
-    {{ context2.identified }}
-    <ul></ul>
-{% else %}
-    {{ context1.name }}
-    {% for k,v in context1.items() %}
-    {{ k }}
-    {{ v }}
-{% endif %}
-{% endfor %}
+{% extends 'layout.html' %}
+{% block content %}
+    {{ super() }}
+    {% if data.age < 18 %}
+        {{ data.name }}
+    {% elif data.age == 18 %}
+        {{ data.school | default(data.school) | default('未名')}}
+        {% with messages = get_flashed_messages() %}
+        {{ messages }}
+        {% endwith %}
+    {% else %}
+        {{ data.age }}
+    {% endif %}
+     {{ messages }}
+{% endblock %}
 
-
-
-{#{% endif %}#}
-
-
-{#    {{context2}}}#}
-{#    123#}
-{#{for in}#}
-{#{if}#}
-</body>
-</html>

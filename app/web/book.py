@@ -8,9 +8,9 @@
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
 from app.web import web
-from flask import request, jsonify, render_template
+from flask import request, jsonify, render_template, flash
 from app.forms.book import SearchForms
-from app.view_models.book import BookCollections, BookViewModel
+from app.view_models.book import BookViewModel, BookCollections
 import json
 
 
@@ -37,9 +37,9 @@ def search():
             yushu_book.search_by_keyword(q, page)
         # __dict__
         books.fill(yushu_book=yushu_book, keyword=q)
-        return json.dumps(books, default=lambda x: x.__dict__)
     else:
-        return json.dumps(form.errors)
+        flash('搜索的关键字不符合要求，请重新输入关键字')
+    return render_template(template_name_or_list='search_result.html', books=books)
 
 
 @web.route('/test')
@@ -48,15 +48,21 @@ def test():
         'name': 'pauline',
         'age': 18
     }
-
+    flash(message='i am message', category='warning')
+    flash(message='message2', category='error')
     r1 = {
-        'name': 'solovotv.liu',
+        'name': 'solotov.liu',
         'identified': 'husband'
     }
-    return render_template(template_name_or_list='test.html', context1=r, context2=r1)
+    return render_template(template_name_or_list='test.html', data=r, context2=r1)
 
 
 @web.route('/test1')
 def test2():
     r = {'sex': 'male'}
     return render_template(template_name_or_list='test2.html', data=r)
+
+
+@web.route('/book/<isbn>/detail')
+def book_detail(isbn):
+    pass

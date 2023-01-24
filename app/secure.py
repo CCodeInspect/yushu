@@ -9,3 +9,4 @@
 DEBUG = True
 PER_PAGE = 15
 SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:12345678@localhost:3306/yushu'
+SECRET_KEY = '1234567'
