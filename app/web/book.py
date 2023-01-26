@@ -32,9 +32,9 @@ def search():
         yushu_book = YuShuBook()
 
         if isbn_or_key == 'isbn':
-            yushu_book.search_by_isbn(q)
+            yushu_book.search_by_isbn(isbn=q)
         else:
-            yushu_book.search_by_keyword(q, page)
+            yushu_book.search_by_keyword(keyword=q, page=page)
         # __dict__
         books.fill(yushu_book=yushu_book, keyword=q)
     else:
@@ -65,4 +65,7 @@ def test2():
 
 @web.route('/book/<isbn>/detail')
 def book_detail(isbn):
-    pass
+    yushu_book = YuShuBook()
+    yushu_book.search_by_isbn(isbn=isbn)
+    book = BookViewModel(yushu_book.get_first_element)
+    return render_template('book_detail.html', book=book, wishes=[], gifts=[])
