@@ -8,10 +8,9 @@
 from app.libs.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
 from app.web import web
-from flask import request, jsonify, render_template, flash
+from flask import request, render_template, flash
 from app.forms.book import SearchForms
 from app.view_models.book import BookViewModel, BookCollections
-import json
 
 
 @web.route(rule='/book/search')  # 路由注册到蓝图

@@ -9,8 +9,27 @@
 @time: 2023/1/26 14:58
 
 """
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from sqlalchemy import Column, String, Integer, Float, Boolean, SmallInteger
+from contextlib import contextmanager
+
+
+class SQLAlchemy(_SQLAlchemy):
+    """
+    1.给flask_sqlalchemy 原生的SQLAlchemy 给别名 '_SQLAlchemy'
+    2.使用contextmanager包装了业务中需要提交之前的所有代码
+    3.业务可直接调用auto_commit()
+    """
+
+    @contextmanager
+    def auto_commit(self):
+        try:
+            yield
+            self.session.commit()
+        except Exception as e:
+            self.session.rollback()
+            raise e
+
 
 db = SQLAlchemy()
 

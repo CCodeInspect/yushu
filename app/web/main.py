@@ -1,7 +1,7 @@
 # from app.models.gift import Gift
 from app.view_models.book import BookViewModel
-from . import web
 from flask import render_template
+from app.web import web
 
 
 # from flask_login import login_required, current_user
@@ -9,7 +9,7 @@ from flask import render_template
 
 @web.route('/')
 def index():
-    pass
+    return "i am index"
 
 
 @web.route('/personal')

@@ -1,25 +1,30 @@
-# from app.libs.enums import PendingStatus
-# from app.models.base import db
-# from app.models.drift import Drift
-# from app.models.gift import Gift
-# from app.view_models.trade import MyTrades
-from . import web
-from flask import current_app, flash, redirect, url_for, render_template
+from flask import current_app, flash
 
-
-# from flask_login import login_required, current_user
+from app.web import web
+from flask_login import login_required, current_user
+from app.models.base import db
+from app.models.gift import Gift
 
 
 @web.route('/my/gifts')
-# @login_required
+@login_required
 def my_gifts():
-    pass
+    return 'myGifts!'
 
 
 @web.route('/gifts/book/<isbn>')
-# @login_required
+@login_required
 def save_to_gifts(isbn):
-    pass
+    if current_user.can_save_to_list(isbn):
+        with db.auto_commit():
+            gift = Gift()
+            gift.isbn = isbn
+            gift.uid = current_user.id
+            current_user.beans += current_app.config['BEANS_UPLOAD_ONE_BOOK']
+            db.session.add(gift)
+
+    else:
+        flash('这本书已添加到你的赠送清单或心愿清单，请不要重复添加')
 
 
 @web.route('/gifts/<gid>/redraw')

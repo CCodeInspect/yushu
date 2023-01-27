@@ -6,7 +6,7 @@ from flask import flash, redirect, url_for, render_template, request
 # from app.models.gift import Gift
 # from app.models.wish import Wish
 # from app.view_models.trade import MyTrades
-from . import web
+from app.web import web
 
 
 # from app import limiter

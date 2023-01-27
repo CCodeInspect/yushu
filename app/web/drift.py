@@ -8,10 +8,10 @@
 # from app.models.wish import Wish
 # from app.view_models.book import BookViewModel
 # from app.view_models.drift import DriftCollection
-from . import web
 # from flask_login import login_required, current_user
 from flask import flash, redirect, url_for, render_template, request, current_app
 from sqlalchemy import desc, or_
+from app.web import web
 
 
 @web.route('/drift/<int:gid>', methods=['GET', 'POST'])

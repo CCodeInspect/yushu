@@ -11,6 +11,9 @@
 """
 
 
+# todo:见 '/app/test/test_context_manager.py'
+
+
 class A:
     def __enter__(self):
         print('进行占用资源')
