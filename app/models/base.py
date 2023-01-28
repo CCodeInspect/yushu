@@ -9,7 +9,7 @@
 @time: 2023/1/26 14:58
 
 """
-from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 from sqlalchemy import Column, String, Integer, Float, Boolean, SmallInteger
 from contextlib import contextmanager
 from datetime import datetime
@@ -32,6 +32,13 @@ class SQLAlchemy(_SQLAlchemy):
             raise e
 
 
+# class Query(BaseQuery):
+#     def filter_by(self, **kwargs):
+#         if 'status' not in kwargs.keys():
+#             kwargs['status'] = 1
+#             return super(Query, self).filter_by(**kwargs)
+
+
 db = SQLAlchemy()
 
 
@@ -48,3 +55,10 @@ class Base(db.Model):
         for k, v in attr_dict.items():
             if hasattr(self, k) and k != 'id':
                 setattr(self, k, v)
+
+    @property
+    def create_date_time(self):
+        if self.create_time:
+            return datetime.fromtimestamp(self.create_time)
+        else:
+            return None

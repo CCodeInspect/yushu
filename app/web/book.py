@@ -5,8 +5,13 @@
 # @Site    : https://github.com/llaichiyu/
 # @File    : book.py
 # @Software: PyCharm
+from flask_login import current_user
+
 from app.libs.helper import is_isbn_or_key
+from app.models.gift import Gift
+from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
+from app.view_models.trade import Trade
 from app.web import web
 from flask import request, render_template, flash
 from app.forms.book import SearchForms
@@ -64,7 +69,33 @@ def test2():
 
 @web.route('/book/<isbn>/detail')
 def book_detail(isbn):
+    """
+    1.当前isbn既不是gift也不是wish
+    2.
+    """
+    has_in_gift = False
+    has_in_wish = False
+
+    # 拿到书籍详情数据
     yushu_book = YuShuBook()
     yushu_book.search_by_isbn(isbn=isbn)
     book = BookViewModel(yushu_book.get_first_element)
-    return render_template('book_detail.html', book=book, wishes=[], gifts=[])
+
+    # 判断当前用户是否登陆
+    if current_user.is_authenticated:
+        user_gift = Gift.query.filter_by(uid=current_user.id, isbn=isbn, launched=False, status=1).first
+        if user_gift:
+            has_in_gift = True
+        user_wish = Wish.query.filter_by(uid=current_user.id, isbn=isbn, launched=False, status=1).first
+        if user_wish:
+            has_in_wish = True
+    # 这里查到的是gift及wish的对象
+    trade_gift = Gift().query.filter_by(isbn=isbn, launched=False).all()
+    trade_wish = Wish().query.filter_by(isbn=isbn, launched=False).all()
+
+    # 把gift及wish的对象传给Trade()
+    gift_trade_models = Trade(trade_gift)
+    wish_trade_models = Trade(trade_wish)
+
+    return render_template('book_detail.html', book=book, wishes=wish_trade_models, gifts=gift_trade_models,
+                           has_in_gift=has_in_gift, has_in_wish=has_in_wish)
