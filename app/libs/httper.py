@@ -13,5 +13,5 @@ class HTTP(object):
     def get(url, return_json=True):
         r = requests.get(url)
         if r.status_code != 200:
-            return {'errrrr': '123'} if return_json else ''
+            return {'errrr': 'code不为200，你的请求有问题，自查哈'} if return_json else ''
         return r.json() if return_json else r.text

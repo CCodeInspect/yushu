@@ -12,6 +12,7 @@
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from sqlalchemy import Column, String, Integer, Float, Boolean, SmallInteger
 from contextlib import contextmanager
+from datetime import datetime
 
 
 class SQLAlchemy(_SQLAlchemy):
@@ -38,7 +39,10 @@ class Base(db.Model):
     __abstract__ = True
     status = Column(SmallInteger, default=1)
 
-    # create_time = Column()
+    create_time = Column('create_time', Integer)
+
+    def __init__(self):
+        self.create_time = int(datetime.now().timestamp())
 
     def set_attrs(self, attr_dict):
         for k, v in attr_dict.items():

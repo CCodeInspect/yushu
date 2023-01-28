@@ -1,7 +1,10 @@
-# from app.forms.auth import RegisterForm, LoginForm, EmailForm, ResetPasswordForm, \
-# ChangePasswordForm
-# from app.models.base import db
-# from app.models.user import User
+#! /usr/bin/env python3
+# -*- coding:utf-8 -*-
+# @Time    : 2023/1/7 17:43
+# @Author  : paulinelee
+# @Site    : https://github.com/llaichiyu/
+# @File    : auth.py
+# @Software: PyCharm
 from app.web import web
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user

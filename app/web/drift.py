@@ -1,16 +1,10 @@
-# from app.forms.book import DriftForm
-# from app.libs.email import send_mail
-# from app.libs.enums import PendingStatus
-# from app.models.base import db
-# from app.models.drift import Drift
-# from app.models.gift import Gift
-# from app.models.user import User
-# from app.models.wish import Wish
-# from app.view_models.book import BookViewModel
-# from app.view_models.drift import DriftCollection
-# from flask_login import login_required, current_user
-from flask import flash, redirect, url_for, render_template, request, current_app
-from sqlalchemy import desc, or_
+#! /usr/bin/env python3
+# -*- coding:utf-8 -*-
+# @Time    : 2023/1/7 17:43
+# @Author  : paulinelee
+# @Site    : https://github.com/llaichiyu/
+# @File    : drift.py
+# @Software: PyCharm
 from app.web import web
 
 

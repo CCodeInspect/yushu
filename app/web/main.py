@@ -1,6 +1,10 @@
-# from app.models.gift import Gift
-from app.view_models.book import BookViewModel
-from flask import render_template
+#! /usr/bin/env python3
+# -*- coding:utf-8 -*-
+# @Time    : 2023/1/7 13:43
+# @Author  : paulinelee
+# @Site    : https://github.com/llaichiyu/
+# @File    : main.py
+# @Software: PyCharm
 from app.web import web
 
 

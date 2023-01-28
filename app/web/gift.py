@@ -1,5 +1,11 @@
-from flask import current_app, flash
-
+#! /usr/bin/env python3
+# -*- coding:utf-8 -*-
+# @Time    : 2023/1/7 13:43
+# @Author  : paulinelee
+# @Site    : https://github.com/llaichiyu/
+# @File    : gift.py
+# @Software: PyCharm
+from flask import current_app, flash, render_template, redirect, url_for
 from app.web import web
 from flask_login import login_required, current_user
 from app.models.base import db
@@ -25,6 +31,7 @@ def save_to_gifts(isbn):
 
     else:
         flash('这本书已添加到你的赠送清单或心愿清单，请不要重复添加')
+    return redirect(url_for(endpoint='web.book_detail', isbn=isbn))
 
 
 @web.route('/gifts/<gid>/redraw')

@@ -1,16 +1,11 @@
-from flask import flash, redirect, url_for, render_template, request
-# from flask.ext.login import current_user
-
-# from app.libs.email import send_mail
-# from app.models.base import db
-# from app.models.gift import Gift
-# from app.models.wish import Wish
-# from app.view_models.trade import MyTrades
+#! /usr/bin/env python3
+# -*- coding:utf-8 -*-
+# @Time    : 2023/1/7 13:43
+# @Author  : paulinelee
+# @Site    : https://github.com/llaichiyu/
+# @File    : wish.py
+# @Software: PyCharm
 from app.web import web
-
-
-# from app import limiter
-# from flask_login import login_required
 
 
 def limit_key_prefix():

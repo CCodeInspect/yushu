@@ -10,7 +10,7 @@
 
 """
 from sqlalchemy import Column, String, Integer, Float, Boolean
-from app.models.base import db, Base
+from app.models.base import Base
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 

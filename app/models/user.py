@@ -9,7 +9,7 @@
 @time: 2023/1/26 14:58
 
 """
-from app.models.base import db, Base
+from app.models.base import Base
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -46,19 +46,20 @@ class User(UserMixin, Base):
         return check_password_hash(self._password, raw)
 
     def can_save_to_list(self, isbn):
-        if is_isbn_or_key(isbn) != isbn:
+        if is_isbn_or_key(isbn) != 'isbn':
             return 'isbn不符合规范'
         yushu_book = YuShuBook()
         yushu_book.search_by_isbn(isbn)
-        if not yushu_book.first:
+        if not yushu_book.get_first_element:
             """
             1.不允许一个用户同时赠送多本相同的书
             2.一个用户不能同时成为赠送人和索要人
             3.当前赠送的图书既不在赠送清单，也不在心愿清单中才能赠送
             """
             return "当前isbn对应的书不存在"
-        gifting = Gift.query().filter_by(uid=self.id, isbn=isbn, launched=False).first()
-        wishing = Wish.query().filter_by(uid=self.id, isbn=isbn, launched=False).first()
+        gifting = Gift.query.filter_by(uid=self.id, isbn=isbn, launched=False).first()
+        wishing = Wish.query.filter_by(uid=self.id, isbn=isbn, launched=False).first()
+
         if not gifting and not wishing:
             return True
         else:
