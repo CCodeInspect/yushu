@@ -50,7 +50,7 @@ class User(UserMixin, Base):
             return 'isbn不符合规范'
         yushu_book = YuShuBook()
         yushu_book.search_by_isbn(isbn)
-        if not yushu_book.get_first_element:
+        if not yushu_book.first:
             """
             1.不允许一个用户同时赠送多本相同的书
             2.一个用户不能同时成为赠送人和索要人

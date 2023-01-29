@@ -5,15 +5,18 @@
 # @Site    : https://github.com/llaichiyu/
 # @File    : main.py
 # @Software: PyCharm
+from flask import render_template
+
+from app.view_models.book import BookViewModel
 from app.web import web
-
-
-# from flask_login import login_required, current_user
+from app.models.gift import Gift
 
 
 @web.route('/')
 def index():
-    return "i am index"
+    recent_gifts = Gift.get_recent_gifts()
+    books = [BookViewModel(gift.book) for gift in recent_gifts]
+    return render_template('index.html', recent=books)
 
 
 @web.route('/personal')
