@@ -23,11 +23,11 @@ class Trade:
 
     def _map_to_trade(self, good):
         if good.create_date_time:
-            time = good.create_date_time.strftime('%Y-%m-d%')
+            time = good.create_date_time.strftime('%Y-%m-%d')
         else:
             time = '未知'
         return dict(
-            username=good.user.nickname,
-            create_time=time,
-            trade_id=good.id
+            user_name=good.user.nickname,  # 这里dict返回的字段要和渲染模版取的字段一致，否则渲染的模版取不到该字段
+            time=time,
+            id=good.id
         )

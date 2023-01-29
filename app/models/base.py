@@ -32,14 +32,17 @@ class SQLAlchemy(_SQLAlchemy):
             raise e
 
 
-# class Query(BaseQuery):
-#     def filter_by(self, **kwargs):
-#         if 'status' not in kwargs.keys():
-#             kwargs['status'] = 1
-#             return super(Query, self).filter_by(**kwargs)
+class Query(BaseQuery):
+    def filter_by(self, **kwargs):
+        if 'status' not in kwargs.keys():
+            kwargs['status'] = 1
+        return super(Query, self).filter_by(**kwargs)
 
 
-db = SQLAlchemy()
+db = SQLAlchemy(query_class=Query)
+
+
+# db = SQLAlchemy()
 
 
 class Base(db.Model):

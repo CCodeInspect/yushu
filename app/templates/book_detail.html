@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='3rd/ui/remodal.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='3rd/ui/remodal-default-theme.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/book-detail.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='3rd/ui/remodal.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='3rd/ui/remodal-default-theme.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/book-detail.css')}}">
 {% endblock %}
 {% block content %}
     {{ super() }}
@@ -47,7 +47,7 @@
                 {% if wishes.total or gifts.total %}
                     <div class="color-count">
                         <span>{{ wishes.total }}人想要 / </span>
-                        <span>{{ gifts.total }}人可赠送</span>
+                        <span>{{ gifts.total}}人可赠送</span>
                     </div>
                 {% endif %}
             </div>

@@ -65,9 +65,6 @@ class User(UserMixin, Base):
         else:
             return False
 
-        # if not yushu_book.search_by_isbn(isbn):
-        #     return '当前isbn对应的书不存在'
-
 
 @login_manager.user_loader
 # 这里的login_manager指的是在create_app时，LoginManager()的实例化对象login_manager，而不是flask_login中的login_manager(无user_loader属性)

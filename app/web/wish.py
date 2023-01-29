@@ -33,7 +33,7 @@ def save_to_wish(isbn):
             db.session.add(wish)
     else:
         flash('这本书已添加到心愿清单或赠送清单，请不要重复添加')
-    return redirect(url_for(endpoint='web.book_detail'), isbn=isbn)
+    return redirect(url_for(endpoint='web.book_detail', isbn=isbn))
 
 
 @web.route('/satisfy/wish/<int:wid>')
