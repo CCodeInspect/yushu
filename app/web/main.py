@@ -16,7 +16,7 @@ from app.models.gift import Gift
 def index():
     recent_gifts = Gift.get_recent_gifts()
     books = [BookViewModel(gift.book) for gift in recent_gifts]
-    return render_template('index.html', recent1=books)
+    return render_template('index.html', recent=books)
 
 
 @web.route('/personal')

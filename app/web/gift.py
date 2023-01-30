@@ -15,7 +15,11 @@ from app.models.gift import Gift
 @web.route('/my/gifts')
 @login_required
 def my_gifts():
-    return 'myGifts!'
+    uid = current_user.id
+    my_gifts = Gift.get_user_gift(uid=uid)
+    isbn_list = [gift.isbn for gift in my_gifts]
+    Gift.get_wish_counts(isbn_list=isbn_list)
+    return render_template('my_gifts.html', Gift=Gift) #未完待续
 
 
 @web.route('/gifts/book/<isbn>')
