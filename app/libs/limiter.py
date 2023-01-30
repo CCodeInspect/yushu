@@ -1,7 +1,11 @@
 """
- Created by 七月 on 2018-4-18.
+@author: pauline.lee
+@contact: Pauline.Y.Li@outlook.com
+@site: https://github.com/llaichiyu/
+@file: limiter1.py
+@time: 2023/1/30 23:44
+
 """
-__author__ = '七月'
 import functools
 from werkzeug.contrib.cache import SimpleCache
 
