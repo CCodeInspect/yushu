@@ -9,6 +9,9 @@
 @time: 2023/1/26 14:58
 
 """
+from flask import current_app
+from itsdangerous import Serializer
+
 from app.models.base import Base
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -67,6 +70,11 @@ class User(UserMixin, Base):
 
 
 @login_manager.user_loader
-# 这里的login_manager指的是在create_app时，LoginManager()的实例化对象login_manager，而不是flask_login中的login_manager(无user_loader属性)
+# 这里的loglogin_manager指的是在create_app时，LoginManager()的实例化对象loglogin_manager，而不是flask_login中的loglogin_manager(无user_loader属性)
 def get_user(uid):
     return User.query.get(int(uid))
+
+
+def generate_token(self, expiration=600):
+    s = Serializer(current_app.config['SECRET_KEY'], expiration)
+    return s.dumps({'id': self.id}).decode('utf-8')

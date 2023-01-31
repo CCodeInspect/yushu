@@ -304,20 +304,20 @@ h6 {
   padding: 73px 0 110px;
   text-align: center; }
 
-.demo-logo {
+.demo-o {
   font-size: 90px;
   font-weight: 900;
   letter-spacing: -2px;
   line-height: 100px; }
-  .demo-logo .logo {
-    background: url("../images/demo/logo-mask.png") center 0 no-repeat;
+  .demo-o .o {
+    background: url("../images/demo/o-mask.png") center 0 no-repeat;
     background-size: 256px 186px;
     height: 186px;
     margin: 0 auto 26px;
     overflow: hidden;
     text-indent: -9999em;
     width: 256px; }
-  .demo-logo small {
+  .demo-o small {
     color: rgba(52, 73, 94, 0.3);
     display: block;
     font-size: 22px;
@@ -504,8 +504,8 @@ h6 {
     width: 134px; }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 2) {
-  .logo {
-    background-image: url("../images/demo/logo-mask-2x.png"); }
+  .o {
+    background-image: url("../images/demo/o-mask-2x.png"); }
 
   .demo-browser {
     background-image: url("../images/demo/browser-2x.png"); } }
@@ -2328,45 +2328,45 @@ body.vjs-full-window {
   -o-animation: sharp 2s ease infinite;
   animation: sharp 2s ease infinite; }
 
-.login {
-  background: url("../images/login/imac.png") 0 0 no-repeat;
+.in {
+  background: url("../images/in/imac.png") 0 0 no-repeat;
   background-size: 940px 778px;
   color: white;
   margin-bottom: 77px;
   padding: 38px 38px 267px;
   position: relative; }
 
-.login-screen {
+.in-screen {
   background-color: #1abc9c;
   min-height: 317px;
   padding: 123px 199px 33px 306px; }
 
-.login-icon {
+.in-icon {
   left: 200px;
   position: absolute;
   top: 160px;
   width: 96px; }
-  .login-icon > img {
+  .in-icon > img {
     display: block;
     margin-bottom: 6px;
     width: 100%; }
-  .login-icon > h4 {
+  .in-icon > h4 {
     font-size: 17px;
     font-weight: 200;
     line-height: 34px;
     opacity: 0.95; }
-    .login-icon > h4 small {
+    .in-icon > h4 small {
       color: inherit;
       display: block;
       font-size: inherit;
       font-weight: 700; }
 
-.login-form {
+.in-form {
   background-color: #eceff1;
   border-radius: 6px;
   padding: 24px 23px 20px;
   position: relative; }
-  .login-form:before {
+  .in-form:before {
     content: "";
     border-style: solid;
     border-width: 12px 12px 12px 0;
@@ -2377,17 +2377,17 @@ body.vjs-full-window {
     top: 35px;
     width: 0;
     -webkit-transform: rotate(360deg); }
-  .login-form .control-group {
+  .in-form .control-group {
     margin-bottom: 6px;
     position: relative; }
-  .login-form .login-field {
+  .in-form .in-field {
     border-color: transparent;
     font-size: 17px;
     padding-bottom: 11px;
     padding-top: 11px;
     text-indent: 3px;
     width: 299px; }
-    .login-form .login-field:focus + .login-field-icon {
+    .in-form .in-field:focus + .login-field-icon {
       color: #1abc9c; }
   .login-form .login-field-icon {
     color: #bfc9ca;

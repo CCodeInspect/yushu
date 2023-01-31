@@ -2313,35 +2313,35 @@ a.list-group-item-danger.active, a.list-group-item-danger:hover, a.list-group-it
   padding: 40px 0;
   background-color: #434a54;
 }
-.footer-logo, .footer-nav {
+.footer-o, .footer-nav {
   float: left;
   width: 20%;
   padding: 0 20px;
 }
 @media (max-width: 768px) {
-  .footer-logo {
+  .footer-o {
     margin-bottom: 20px;
   }
-  .footer-logo, .footer-nav {
+  .footer-o, .footer-nav {
     display: block;
     float: none;
     width: 100%;
   }
 }
-.footer-logo {
+.footer-o {
   height: 32px;
   margin-top: -5px;
   line-height: 32px;
 }
-.footer-logo img {
+.footer-o img {
   margin-right: 10px;
 }
-.footer-logo a {
+.footer-o a {
   font-size: 20px;
   font-weight: bold;
   color: white;
 }
-.footer-logo a:hover, .footer-logo a:active {
+.footer-o a:hover, .footer-o a:active {
   text-decoration: none;
 }
 .footer-nav .nav-title {

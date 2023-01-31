@@ -12,14 +12,14 @@
 from app.view_models.book import BookViewModel
 
 
-class MyGift:
+class MyWish:
     def __init__(self, id, book, wishes_count):
         self.id = id
         self.book = book
         self.wishes_count = wishes_count
 
 
-class MyGifts:
+class MyWishes:
     def __init__(self, my_gift_list, wishes_list):
         self.gifts = []
 

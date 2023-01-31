@@ -15,7 +15,6 @@ from app.models.base import Base, db
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
-from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
 
 
@@ -35,6 +34,7 @@ class Gift(Base):
 
     @classmethod
     def get_wishs_count(cls, isbn_list):
+        from app.models.wish import Wish
         """使用in在wishes表中查询isbn列表中的心愿，计算数量"""
         count_list = db.session.query(func.count(Wish.id), Wish.isbn).filter(Wish.launched == False,
                                                                              Wish.isbn.in_(isbn_list),

@@ -33,3 +33,7 @@ class RegisterForm(Form):
 class LoginForm(Form):
     email = StringField(validators=[Length(min=8, max=64), DataRequired(), Email('电子邮箱不符合规范')])
     password = PasswordField(validators=[Length(min=6, max=32), DataRequired('密码不能为空，请输入你的密码')])
+
+
+class EmailForm(Form):
+    email = StringField(validators=[Length(min=8, max=64), DataRequired(), Email('电子邮箱不符合规范')])

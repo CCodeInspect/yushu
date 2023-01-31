@@ -6,8 +6,7 @@
 # @File    : gift.py
 # @Software: PyCharm
 from flask import current_app, flash, render_template, redirect, url_for
-
-from app.view_models.gift import MyGifts
+from app.view_models.trade import MyTrades
 from app.web import web
 from flask_login import login_required, current_user
 from app.models.base import db
@@ -29,8 +28,8 @@ def my_gifts():
     my_gift_list = Gift.get_user_gift_list(uid=uid)
     isbn_list = [gift.isbn for gift in my_gift_list]
     wishes_list = Gift.get_wishs_count(isbn_list=isbn_list)
-    view_model_gifts = MyGifts(my_gift_list=my_gift_list, wishes_list=wishes_list)
-    return render_template('my_gifts.html', gifts=view_model_gifts.gifts)
+    view_model_gifts = MyTrades(trades_of_mine=my_gift_list, trade_count_list=wishes_list)
+    return render_template('my_gifts.html', gifts=view_model_gifts.trades)
 
 
 @web.route('/gifts/book/<isbn>')
