@@ -6,6 +6,8 @@
 # @File    : gift.py
 # @Software: PyCharm
 from flask import current_app, flash, render_template, redirect, url_for
+
+from app.view_models.gift import MyGifts
 from app.web import web
 from flask_login import login_required, current_user
 from app.models.base import db
@@ -15,11 +17,20 @@ from app.models.gift import Gift
 @web.route('/my/gifts')
 @login_required
 def my_gifts():
+    """
+    1.current_user.id
+    2.当前用户的赠送清单 Gift
+    3.求赠送清单的总数 Gift.total
+    4.每本书的详情 book.detail
+    5.每本书对应的几个人想要  gift.isbn == wish.isbn
+    :return:
+    """
     uid = current_user.id
-    my_gifts = Gift.get_user_gift(uid=uid)
-    isbn_list = [gift.isbn for gift in my_gifts]
-    Gift.get_wish_counts(isbn_list=isbn_list)
-    return render_template('my_gifts.html', Gift=Gift) #未完待续
+    my_gift_list = Gift.get_user_gift_list(uid=uid)
+    isbn_list = [gift.isbn for gift in my_gift_list]
+    wishes_list = Gift.get_wishs_count(isbn_list=isbn_list)
+    view_model_gifts = MyGifts(my_gift_list=my_gift_list, wishes_list=wishes_list)
+    return render_template('my_gifts.html', gifts=view_model_gifts.gifts)
 
 
 @web.route('/gifts/book/<isbn>')

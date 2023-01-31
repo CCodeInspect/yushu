@@ -29,20 +29,17 @@ class Gift(Base):
     launched = Column(Boolean, default=False)
 
     @classmethod
-    def get_user_gift(cls, uid):
-        gifts = cls.query.filter_by(uid=uid, launched=False).order_by(desc(cls.create_time)).all()
-        return gifts
+    def get_user_gift_list(cls, uid):
+        gift = cls.query.filter_by(uid=uid, launched=False).order_by(desc(cls.create_time)).all()
+        return gift
 
     @classmethod
-    def get_wish_counts(cls, isbn_list):
-        """wish_counts和get_user_gift的gifts一样，都是查询对象，无数据"""
-        wish_counts = db.session.query(func.count(Wish.id), Wish.isbn).filter(
-            Wish.launched == False,
-            Wish.isbn.in_(isbn_list),
-            Wish.status == 1).group_by(
+    def get_wishs_count(cls, isbn_list):
+        """使用in在wishes表中查询isbn列表中的心愿，计算数量"""
+        count_list = db.session.query(func.count(Wish.id), Wish.isbn).filter(Wish.launched == False,
+                                                                             Wish.isbn.in_(isbn_list),
+                                                                             Wish.status == 1).group_by(
             Wish.isbn).all()
-
-        count_list = [{'count': wish[0], 'isbn': wish[1]} for wish in wish_counts]
 
         count_list = [{'count': w[0], 'isbn': w[1]} for w in count_list]
 
