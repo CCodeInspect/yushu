@@ -6,6 +6,7 @@
 # @File    : __init__.py.py
 # @Software: PyCharm
 
+
 from flask import Flask
 from app.models.base import db
 from flask_login import LoginManager
@@ -22,6 +23,7 @@ def create_app():
     register_blueprint(app)
 
     db.init_app(app)
+
     login_manager.init_app(app)
     login_manager.in_view = 'web.login'  # login_view知道了web.login是登陆视图函数
     login_manager.login_message = '请先登录或注册'

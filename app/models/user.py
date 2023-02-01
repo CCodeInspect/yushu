@@ -9,15 +9,18 @@
 @time: 2023/1/26 14:58
 
 """
-from flask import current_app
-from itsdangerous import Serializer
+import datetime
+import json
 
-from app.models.base import Base
+import jwt
+from flask import current_app
+from flask_login import UserMixin, current_user
 from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+
 from app import login_manager
 from app.libs.helper import is_isbn_or_key
+from app.models.base import Base
 from app.models.gift import Gift
 from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
@@ -68,13 +71,42 @@ class User(UserMixin, Base):
         else:
             return False
 
+    # @staticmethod
+    # def reset_password1(token, new_password):
+    #     uid =
+    #     return 1
+
+    def decrypt_token(self, token):
+        p = jwt.decode(jwt=token, key=current_app.config['SECRET_KEY'])
+        return p
+
+    def generate_token(self):
+        """
+        https://pyjwt.readthedocs.io/en/latest/usage.html
+        :param user_id:
+        :return:
+        """
+        dic = {
+            'exp': datetime.datetime.now() + datetime.timedelta(seconds=current_app.config['TOKEN_EXPIRE']),  # 过期时间
+            'iat': datetime.datetime.now(),  # 发行时间
+            'iss': current_app.config['TOKEN_ISS'],  # token签发者
+            'data': {  # 内容，一般存放该用户id和开始时间
+                'user_id': self.id
+            }
+        }
+        s = jwt.encode(payload=dic, key=current_app.config['SECRET_KEY'],
+                       algorithm=current_app.config['TOKEN_ALGORITHM'])  # 加密生成字符串
+        return s
+
+    def decoder(self):
+        encoded = self.generate_token()
+        decoded = jwt.decode(jwt=encoded, key=current_app.config['SECRET_KEY'],
+                             algorithms=current_app.config['TOKEN_ALGORITHM'])
+        print(decoded)
+        return decoded
+
 
 @login_manager.user_loader
 # 这里的loglogin_manager指的是在create_app时，LoginManager()的实例化对象loglogin_manager，而不是flask_login中的loglogin_manager(无user_loader属性)
 def get_user(uid):
     return User.query.get(int(uid))
-
-
-def generate_token(self, expiration=600):
-    s = Serializer(current_app.config['SECRET_KEY'], expiration)
-    return s.dumps({'id': self.id}).decode('utf-8')
