@@ -20,7 +20,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import login_manager
 from app.libs.helper import is_isbn_or_key
-from app.models.base import Base
+from app.models.base import Base, db
 from app.models.gift import Gift
 from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
@@ -71,16 +71,17 @@ class User(UserMixin, Base):
         else:
             return False
 
-    # @staticmethod
-    # def reset_password1(token, new_password):
-    #     uid =
-    #     return 1
+    @staticmethod
+    def reset_password(token, new_password):
+        tk_decoder = User.token_decoder(token=token)
+        if tk_decoder:
+            user_id = tk_decoder['data']['user_id']
+            if user_id:
+                user = User.query.get(user_id)
+                user.password = new_password
+        return True
 
-    def decrypt_token(self, token):
-        p = jwt.decode(jwt=token, key=current_app.config['SECRET_KEY'])
-        return p
-
-    def generate_token(self):
+    def token_generator(self):
         """
         https://pyjwt.readthedocs.io/en/latest/usage.html
         :param user_id:
@@ -98,11 +99,10 @@ class User(UserMixin, Base):
                        algorithm=current_app.config['TOKEN_ALGORITHM'])  # 加密生成字符串
         return s
 
-    def decoder(self):
-        encoded = self.generate_token()
-        decoded = jwt.decode(jwt=encoded, key=current_app.config['SECRET_KEY'],
+    @staticmethod
+    def token_decoder(token):
+        decoded = jwt.decode(jwt=token, key=current_app.config['SECRET_KEY'],
                              algorithms=current_app.config['TOKEN_ALGORITHM'])
-        print(decoded)
         return decoded
 
 
