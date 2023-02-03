@@ -10,10 +10,12 @@ from flask_login import login_required, current_user
 from sqlalchemy import desc, or_
 from app.forms.book import DriftForm
 from app.libs.email import send_mail
+from app.libs.enums import PendingStatus
 from app.models.base import db
 from app.models.drift import Drift
 from app.models.gift import Gift
 from app.view_models.book import BookViewModel
+from app.view_models.drift import DriftCollection
 from app.web import web
 
 
@@ -46,9 +48,11 @@ def send_drift(gid):
 @web.route('/pending')
 @login_required
 def pending():
-    drift = Drift().query.filter(
+    drifts = Drift().query.filter(
         or_(Drift.requester_id == current_user.id, Drift.gifter_id == current_user.id)).order_by(
         desc(Drift.create_time)).all()
+    views = DriftCollection(drifts=drifts, current_user_id=current_user.id)
+    return render_template('pending.html', drifts=views.data)
 
 
 @web.route('/drift/<int:did>/reject')
@@ -57,8 +61,12 @@ def reject_drift(did):
 
 
 @web.route('/drift/<int:did>/redraw')
+@login_required
 def redraw_drift(did):
-    pass
+    with db.auto_commit():
+        drift = Drift.query.filter(Drift.id == did).first_or_404
+        drift.pending = PendingStatus().redraw
+    return redirect(url_for(endpoint='web.pending'))
 
 
 @web.route('/drift/<int:did>/mailed')
