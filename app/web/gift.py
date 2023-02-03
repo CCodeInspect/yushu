@@ -6,6 +6,9 @@
 # @File    : gift.py
 # @Software: PyCharm
 from flask import current_app, flash, render_template, redirect, url_for
+
+from app.libs.enums import PendingStatus
+from app.models.drift import Drift
 from app.view_models.trade import MyTrades
 from app.web import web
 from flask_login import login_required, current_user
@@ -49,6 +52,14 @@ def save_to_gifts(isbn):
 
 
 @web.route('/gifts/<gid>/redraw')
-# @login_required
+@login_required
 def redraw_from_gifts(gid):
-    pass
+    gift = Gift.query.filter_by(id=gid, launched=False).first_or_404()
+    dirft = Drift.query.filter_by(gift_id=gid, pending=PendingStatus.waiting).first()
+    if dirft:
+        flash("您的这个礼物正处于交易状态，请先前往鱼漂完成交易")
+    else:
+        with db.auto_commit():
+            current_user.beans -= current_app.config['BEANS_UPLOAD_ONE_BOOK']
+            gift.delete()
+    return redirect(url_for('web.my_gifts'))

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
     {{ super() }}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/pending.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pending.css') }}">
 {% endblock %}
 {% block content %}
     <div class="row module-title">
@@ -42,7 +42,8 @@
                                 <a href="{{ url_for('web.mailed_drift', did=drift.drift_id) }}">
                                     <span class="btn-normal">已邮寄</span>
                                 </a>
-                                <a style="margin-top:20px;" href="{{ url_for('web.reject_drift', did=drift.drift_id) }}">
+                                <a style="margin-top:20px;"
+                                   href="{{ url_for('web.reject_drift', did=drift.drift_id) }}">
                                     <span class="btn-shadow">拒&nbsp;&nbsp;&nbsp;绝</span>
                                 </a>
                             {% endif %}
@@ -50,7 +51,7 @@
                         {% if drift.you_are == 'requester' %}
                             {% if drift.status.value == 1 %}
                                 <a href="{{ url_for('web.redraw_drift', did=drift.drift_id) }}">
-                                        <span class="btn-normal">撤 销</span>
+                                    <span class="btn-normal">撤 销</span>
                                 </a>
                             {% endif %}
                         {% endif %}

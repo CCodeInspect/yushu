@@ -14,7 +14,7 @@ from app.models.base import Base
 class Book(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(50), nullable=False)
-    author = Column(String(30), default='未名')
+    author = Column(String(100), default='未名')
     binding = Column(String(20))
     publisher = Column(String(50))
     price = Column(String(20))
