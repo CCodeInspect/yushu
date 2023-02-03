@@ -62,3 +62,6 @@ class Gift(Base):
         recent_gifts = cls.query.filter_by(launched=False).group_by(cls.isbn).order_by(desc(cls.create_time)).limit(
             current_app.config['RECENT_BOOK_COUNT']).distinct().all()
         return recent_gifts
+
+    def is_your_gift(self, uid):
+        return True if self.uid == uid else False

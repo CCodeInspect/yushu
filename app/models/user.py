@@ -11,6 +11,7 @@
 """
 import datetime
 import json
+from math import floor
 
 import jwt
 from flask import current_app
@@ -19,8 +20,10 @@ from sqlalchemy import Column, Integer, String, Boolean, Float
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import login_manager
+from app.libs.enums import PendingStatus
 from app.libs.helper import is_isbn_or_key
 from app.models.base import Base, db
+from app.models.drift import Drift
 from app.models.gift import Gift
 from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
@@ -51,6 +54,15 @@ class User(UserMixin, Base):
     def check_password(self, raw):
         return check_password_hash(self._password, raw)
 
+    @property
+    def summary(self):
+        return dict(
+            nickname=self.nickname,
+            beans=self.beans,
+            email=self.email,
+            send_receive=str(self.send_counters) + '/' + str(self.receive_counter)
+        )
+
     def can_save_to_list(self, isbn):
         if is_isbn_or_key(isbn) != 'isbn':
             return 'isbn不符合规范'
@@ -70,6 +82,14 @@ class User(UserMixin, Base):
             return True
         else:
             return False
+
+    def can_send_drift(self):
+        if self.beans < 1:
+            return False
+        success_gifts_count = Gift.query.filter_by(uid=self.id, launched=False).count()
+        success_receive_count = Drift.query.filter_by(requester_id=self.id, pending=PendingStatus.success).count()
+
+        return True if floor(success_receive_count / 2) <= success_gifts_count else False
 
     @staticmethod
     def reset_password(token, new_password):

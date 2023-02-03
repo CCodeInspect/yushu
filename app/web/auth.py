@@ -11,6 +11,7 @@ from flask_login import login_user, logout_user
 from app.forms.auth import RegisterForm, LoginForm, EmailForm, ResetPasswordForm
 from app.models.user import User
 from app.models.base import db
+from app.libs.email import send_mail
 
 
 @web.route('/register', methods=['GET', 'POST'])
@@ -52,10 +53,10 @@ def forget_password_request():
     if request.method == 'POST' and form.validate():
         account_email = form.email.data
         user = User.query.filter_by(email=account_email).first_or_404()
-        from app.libs.email import send_mail
         send_mail(to=form.email.data, subject='重置你的密码', template='email/reset_password.html', user=user,
                   token=user.token_generator())
         flash("一封邮件已经发到" + account_email + "的邮箱，请查收")
+        return redirect(url_for(endpoint='web.login'))
     return render_template('auth/forget_password_request.html', form=form)
 
 
