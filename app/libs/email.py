@@ -25,7 +25,7 @@ def send_async_email(app, msg):
 
 def send_mail(to, subject, template, **kwargs):
     # msg = Message(subject='测试邮件', sender='302869907@qq.com', body='123', recipients=['302869907@qq.com'])
-    msg = Message('[鱼书]' + '' + subject, sender=current_app.config['MAIL_USERNAME'], recipients=[to])
+    msg = Message('[i换书]' + '' + subject, sender=current_app.config['MAIL_USERNAME'], recipients=[to])
     msg.html = render_template(template, **kwargs)
     app = current_app._get_current_object()
     thr = Thread(target=send_async_email, args=[app, msg])
