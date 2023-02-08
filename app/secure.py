@@ -8,7 +8,7 @@
 
 DEBUG = True
 PER_PAGE = 15
-SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:12345678@localhost:3306/yushu'
+SQLALCHEMY_DATABASE_URI = 'mysql+cymysql://root:12345678@localhost:3306/ihuanshu'
 SECRET_KEY = '1234567AXBEQWJEKLQWKEHQJDBAKJHDY1/2378$%^&*(HNJAFHgjbjkn'
 BEANS_UPLOAD_ONE_BOOK = 0.5
 BEANS_DOWNLOAD_ONE_BOOK = 1
@@ -21,7 +21,7 @@ MAIL_PORT = 465
 MAIL_USE_SSL = True
 MAIL_USE_TLS = False
 MAIL_USERNAME = '302869907@qq.com'
-MAIL_PASSWORD = 'otuwarezykupbigj'
+MAIL_PASSWORD = 'ycorclmomlfybjig'
 # MAIL_USERNAME = 'pauline@homemade.ntesmail.com'
 
 

@@ -3,7 +3,7 @@
 # @Time    : 2023/1/6 23:36
 # @Author  : paulinelee
 # @Site    : https://github.com/llaichiyu/
-# @File    : fisher.py
+# @File    : main.py
 # @Software: PyCharm
 
 
