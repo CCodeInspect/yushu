@@ -188,7 +188,7 @@ $ python main.py
 
 如果您觉得这个项目对你`有所帮助`，可以请我吃根辣条哦~或者帮忙点个star，让我创作更有动力！！！谢谢大家啦！
 
-![](https://github.com/llaichiyu/yushu/blob/main/app/contact.jpeg)
+![]()
 
 ![]()
 
