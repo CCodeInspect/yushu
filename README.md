@@ -74,7 +74,7 @@
 ![](https://github.com/llaichiyu/yushu/blob/main/app/static/readme_pic/xinyuanqingdan.png)
 
 #### 书漂
-![](https://github.com/llaichiyu/yushu/blob/main/app/static/readme_pic/yupiao.png)
+![](https://github.com/llaichiyu/yushu/blob/main/app/static/readme_pic/shupiao.png)
 
 </details>
 
@@ -131,8 +131,6 @@ $ python main.py
 打开浏览器输入: `http://localhost:50018`进入登录页。
 
 点击注册按钮，成为第一个用户吧～
-
-![](https://static.pity.fun/picture%2F%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220504235808.png)
 
 登录后就可以开启ihuanshu之旅啦！
 
