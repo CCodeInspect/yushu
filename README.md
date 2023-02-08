@@ -11,7 +11,7 @@
 ### 🎉 技术栈
 
 - [x] 🎨 Flask(写web木有问题)
-- [x] 🎶 SQLAlchemy(有两种写法)
+- [x] 🎶 SQLAlchemy(查询有两种写法)
 - [x] 🎃 JinJa(前端的模版）
 
 ### ⚽前端地址
