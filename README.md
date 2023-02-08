@@ -6,7 +6,7 @@
 
 > ~~HttpException未统一写成类，后续会优化~~
 >
-> 由于最近一致忙于[ihuanshu](https://github.com/llaichiyu/yushu)未及时更新，请各位谅解...
+> 由于最近一直忙于[ihuanshu](https://github.com/llaichiyu/yushu)未及时更新，请各位谅解...
 
 ### 🎉 技术栈
 
@@ -63,18 +63,18 @@
 
 #### 🍦 最近上传
 
-![]()
+![](https://github.com/llaichiyu/yushu/blob/main/app/static/readme_pic/zuijinshangchuan.png)
 
 #### 赠送清单
 
-![]()
+![](https://github.com/llaichiyu/yushu/blob/main/app/static/readme_pic/zengsongqingdan.png)
 
 #### 心愿清单
 
-![]()
+![](https://github.com/llaichiyu/yushu/blob/main/app/static/readme_pic/xinyuanqingdan.png)
 
 #### 书漂
-
+![](https://github.com/llaichiyu/yushu/blob/main/app/static/readme_pic/yupiao.png)
 
 </details>
 
@@ -90,7 +90,7 @@
 
 [开发文档-掘金]()
 
-### 😢 关于Pity平台
+### 😢 关于ihuanshu平台
 
 ihuanshu是一款专注于图书互换平台，采用`Python`+`Flask`+`JinJa`开发。
 
